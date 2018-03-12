@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo -e "Launching the Docker Salvage Ship!"
+count=`docker ps -aq | wc -l`
+
+if [ $count -lt 1 ]
+then
+ echo -e "No containers found"
+ exit 1
+fi
+  
+echo  -e "Found $count containers on your ship"
+echo "stopping containers "
+docker stop $(docker ps -aq)
+echo "done"
+echo "throwing containers overboard "
+docker rm $(docker ps -aq)
+echo "done"
+endCount=`docker ps -aq | wc -l` 
+echo -e  "You  now have $endCount containers"
+            
+
